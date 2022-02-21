@@ -1,5 +1,3 @@
-package com.anthony4834.dragon_cave;
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -14,18 +12,15 @@ public class Main {
             correctNum = (int) Math.floor(Math.random() * 21) + 1;
         }
 
-        public static ArrayList<String> takeGuess() {
+        public static ArrayList<String> takeGuess(int guess) {
             ArrayList<String> output = new ArrayList<String>();
 
-            Scanner input = new Scanner(System.in);
             try {
-                int guess = input.nextInt();
                 output.add(String.valueOf(guess == correctNum));
                 output.add(correctNum < guess ? "High" : "Low");
 
                 return output;
-            } catch(InputMismatchException e) {
-                System.out.println("I said a number..");
+            } catch(Exception e) {
                 begin();
             }
             return null;
@@ -36,7 +31,10 @@ public class Main {
             System.out.println("\nTake a guess");
 
             try {
-                ArrayList<String> verdict = takeGuess();
+                Scanner input = new Scanner(System.in);
+                int guess = input.nextInt();
+
+                ArrayList<String> verdict = takeGuess(guess);
 
                 switch(verdict.get(0)) {
                     case "true":
@@ -57,7 +55,8 @@ public class Main {
                         return "";
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println("I said a number..");
+                begin();
             }
 
             return null;
