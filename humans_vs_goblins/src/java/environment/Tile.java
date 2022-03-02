@@ -12,6 +12,8 @@ public class Tile {
         this.size = 1;
         this.x = x;
         this.y = y;
+        this.occupant = null;
+        this.isOccupied = false;
     }
     public void occupy(Object o) {
         this.occupant = o;

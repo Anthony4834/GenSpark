@@ -1,14 +1,21 @@
 package actors;
 
+import app.Main;
+import environment.MapGrid;
+import environment.Tile;
 import events.DIRECTION;
+
+import java.util.HashMap;
 
 public class Actor {
 
     private int x, y;
+    private HashMap<Integer, Tile> tileMap;
 
     public Actor(int x, int y) {
         this.x = x;
         this.y = y;
+        this.tileMap = MapGrid.tileMap;
     }
 
     public boolean move(DIRECTION d) {
@@ -21,6 +28,10 @@ public class Actor {
         }
         this.x = dx;
         this.y = dy;
+
+        Tile destination = tileMap.get(Main.parseFromCoord(this.x, this.y));
+        destination.occupy(this);
+
 
         return true;
     }

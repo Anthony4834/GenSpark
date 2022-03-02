@@ -1,3 +1,5 @@
+package app;
+
 import environment.MapGrid;
 
 public class Main {
@@ -16,6 +18,9 @@ public class Main {
             System.out.println(s);
         else
             System.out.print(s);
+    }
+    public static int parseFromCoord(int x, int y) {
+        return Integer.parseInt(String.format("%s%s", x, y));
     }
 
 }

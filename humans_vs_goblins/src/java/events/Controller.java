@@ -1,9 +1,7 @@
 package events;
 
-import actors.Actor;
 import actors.Human;
 
-import java.util.Enumeration;
 import java.util.Scanner;
 
 public class Controller {
