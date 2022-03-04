@@ -1,9 +1,13 @@
 package app;
 
+import actors.Goblin;
 import actors.Human;
 import environment.MapGrid;
 import events.Controller;
 import events.DIRECTION;
+import events.Round;
+
+import java.util.HashSet;
 
 public class HumansVsGoblins {
 
@@ -11,42 +15,71 @@ public class HumansVsGoblins {
     private MapGrid mapGrid;
     private Human player;
     private Controller controller;
+    private Round round;
+    private Goblin[] enemies;
+    private int prevTurn;
 
     public void init() {
         System.out.println("Initializing..");
 
         player = new Human();
+        enemies = generateEnemies(5);
         controller = new Controller(player);
+        prevTurn = -1;
 
-        System.out.println(player.getX());
-        System.out.println(player.getY());
 
-        String input = (String) controller.getInput();
-
-        switch(input) {
-            case "w":
-                player.move(DIRECTION.NORTH);
-                break;
-            case "a":
-                player.move(DIRECTION.EAST);
-                break;
-            case "s":
-                player.move(DIRECTION.SOUTH);
-                break;
-            case "d":
-                player.move(DIRECTION.WEST);
-                break;
-            default:
-                break;
-        }
-        System.out.println(player.getX());
-        System.out.println(player.getY());
         mapGrid.printTileMap();
 
+        while(true) {
+            this.round = new Round(this);
 
+            if(prevTurn == -1)
+                this.round.start(1);
 
+            this.round.start(prevTurn == 1 ? 0 : 1);
+        }
 
+    }
 
+    public Goblin[] generateEnemies(int i) {
+        Goblin[] output = new Goblin[i];
+        HashSet<Integer> usedNums = new HashSet<>();
+
+        for(int e : Main.array(output.length)) {
+            int ran = 1 + (int) (Math.random() * 9);
+
+            while(usedNums.contains(ran)) {
+                if(ran < 1)
+                    ran = 10;
+
+                ran--;
+            }
+
+            output[e] = new Goblin(1, ran, this);
+            usedNums.add(ran);
+        }
+
+        return output;
+    }
+
+    public Goblin[] getEnemies() {
+        return enemies;
+    }
+
+    public int getPrevTurn() {
+        return prevTurn;
+    }
+
+    public void setPrevTurn(int prevTurn) {
+        this.prevTurn = prevTurn;
+    }
+
+    public Human getPlayer() {
+        return player;
+    }
+
+    public Controller getController() {
+        return controller;
     }
 
     public int getMapSize() {

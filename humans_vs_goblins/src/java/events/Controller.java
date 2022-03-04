@@ -1,6 +1,7 @@
 package events;
 
 import actors.Human;
+import app.Main;
 
 import java.util.Scanner;
 
@@ -14,9 +15,15 @@ public class Controller {
     }
 
     public Object getInput() {
-        Scanner input = new Scanner(System.in);
+        try {
+            Scanner input = new Scanner(System.in);
 
-        return input.next();
+            return input.next();
+        } catch(Exception e) {
+            Main.p(false, e.toString());
+        }
+
+        return null;
     }
 
 

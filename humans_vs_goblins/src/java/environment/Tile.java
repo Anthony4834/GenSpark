@@ -47,15 +47,19 @@ public class Tile {
         return occupant;
     }
 
-    public void setOccupant(Object occupant) {
+    public Tile setOccupant(Object occupant) {
         this.occupant = occupant;
+
+        return this;
     }
 
     public boolean isOccupied() {
         return isOccupied;
     }
 
-    public void setOccupied(boolean occupied) {
+    public Tile setOccupied(boolean occupied) {
         isOccupied = occupied;
+
+        return this;
     }
 }

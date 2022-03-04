@@ -22,5 +22,14 @@ public class Main {
     public static int parseFromCoord(int x, int y) {
         return Integer.parseInt(String.format("%s%s", x, y));
     }
+    public static int[] array(int i) {
+        int[] output = new int[i];
+
+        for(int e = 0; e < i; e++) {
+            output[e] = e;
+        }
+
+        return output;
+    }
 
 }
